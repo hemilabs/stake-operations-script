@@ -1,0 +1,6 @@
+.DS_STORE
+.eslintcache
+.vscode
+node_modules
+# generated files
+*.csv

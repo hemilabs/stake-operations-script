@@ -1,0 +1,33 @@
+{
+  "name": "stake-operations-script",
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint": "eslint --cache .",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@hemilabs/token-list": "1.16.0",
+    "fetch-plus-plus": "1.0.0",
+    "p-do-whilst": "2.1.0",
+    "p-min-delay": "4.1.0",
+    "viem": "2.27.0",
+    "yargs": "17.7.2"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "7.27.0",
+    "@babel/plugin-syntax-import-assertions": "7.26.0",
+    "@commitlint/cli": "19.8.0",
+    "better-sort-package-json": "1.1.1",
+    "commitlint-config-bloq": "1.1.0",
+    "eslint": "8.57.1",
+    "eslint-config-bloq": "4.5.0",
+    "husky": "9.1.7",
+    "lint-staged": "15.5.1",
+    "prettier": "3.5.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module"
+}

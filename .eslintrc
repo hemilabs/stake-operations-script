@@ -1,0 +1,17 @@
+{
+  "extends": ["bloq", "bloq/node"],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "babelOptions": {
+      "plugins": ["@babel/plugin-syntax-import-assertions"],
+    },
+    "ecmaVersion": "latest",
+    "requireConfigFile": false,
+    "sourceType": "module",
+  },
+  "rules": {
+    "no-console": "off",
+    "prefer-template": "off",
+    "quotes": ["error", "double"],
+  },
+}
