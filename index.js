@@ -85,7 +85,7 @@ const mapInfo = (operations) =>
 
 // filter operations by transactionHash, removing all those whose transactionHash field
 // is already present on previousOperations
-const removeDuplicates = (previousOperations) => (operations) =>
+const removeDuplicates = (previousOperations, operations) =>
   operations.filter(
     (operation) =>
       !previousOperations.some(
@@ -122,7 +122,12 @@ const writeToCsv = function (operations) {
   }
 
   const { blockNumber, type } = operations.at(-1);
-  console.log("Writing %s operations up to block %s", type, blockNumber);
+  console.log(
+    "Writing %s %s operations up to block %s",
+    operations.length,
+    type,
+    blockNumber,
+  );
 
   fs.appendFileSync(csvFilePath, csvLines.join("\n") + "\n", "utf8");
 };
@@ -146,11 +151,15 @@ const requestSubgraph = async function ({ accessor, query, url }) {
           }
           return accessor(response);
         })
-        .then(mapInfo)
-        .then(removeDuplicates(previousOperations));
+        .then(mapInfo);
+
+      // remove no duplicates, that may appear from updating the "fromBlock". However
+      // we should return the original query elements to prevent from skipping options when querying
+      // in the next iteration of the loop
+      const noDuplicates = removeDuplicates(previousOperations, operations);
 
       // Write operations to CSV before the next iteration
-      writeToCsv(operations);
+      writeToCsv(noDuplicates);
 
       const calculateSkip = function () {
         // it turns out that GraphQL does not allow skip larger than 5000
